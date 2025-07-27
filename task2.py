@@ -20,14 +20,14 @@ else:
     target_col = None
 
 # 1. Basic Info
-print("🚀 Dataset Info:")
+print(" Dataset Info:")
 print("Train shape:", train.shape)
 print("Test shape:", test.shape)
 print("\nTrain info:\n")
 print(train.info())
 
 # 2. Missing Values
-print("\n🔍 Missing Values:")
+print("\n Missing Values:")
 missing = train.isnull().sum()
 print(missing[missing > 0])
 
@@ -41,10 +41,10 @@ train.fillna(train.median(numeric_only=True), inplace=True)
 train.fillna(method='ffill', inplace=True)
 
 # 3. Summary Stats
-print("\n📊 Summary Statistics:")
+print("\n Summary Statistics:")
 print(train.describe(include='all'))
 
-print("\n🧾 Column Overview:")
+print("\n Column Overview:")
 print(train.dtypes.value_counts())
 print("\nUnique values in categorical columns:")
 cat_cols = train.select_dtypes(include='object').columns
@@ -53,7 +53,7 @@ for col in cat_cols:
 
 # 4. Univariate Analysis - Numeric Columns
 numeric_cols = train.select_dtypes(include=['int64', 'float64']).columns
-print(f"\n🔢 Numeric columns: {list(numeric_cols)}")
+print(f"\n Numeric columns: {list(numeric_cols)}")
 
 for col in numeric_cols:
     plt.figure()
@@ -86,7 +86,7 @@ if len(numeric_cols) >= 2:
 
 # 7. Bivariate Analysis with Target (if detected)
 if target_col and target_col in train.columns:
-    print(f"\n🎯 Target column: {target_col}")
+    print(f"\n Target column: {target_col}")
 
     for col in numeric_cols:
         if col != target_col:
@@ -105,11 +105,11 @@ if target_col and target_col in train.columns:
             plt.tight_layout()
             plt.show()
 else:
-    print("\n⚠️ Target column not found — skipping bivariate analysis.")
+    print("\n Target column not found — skipping bivariate analysis.")
 
 # 8. Compare Train/Test Columns
-print("\n🧪 Train/Test Column Differences:")
+print("\n Train/Test Column Differences:")
 print("Columns in train not in test:", set(train.columns) - set(test.columns))
 print("Columns in test not in train:", set(test.columns) - set(train.columns))
 
-print("\n✅ EDA Completed.")
+print("\n EDA Completed.")
